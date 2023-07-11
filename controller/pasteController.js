@@ -57,7 +57,7 @@ const readPaste = async (req, res) => {
 
     res.status(200).json(data);
 
-    if (data.delFlag === true) {
+    if (data.burnAfterRead === true) {
       await pasteModel.findByIdAndDelete(id);
     }
   } catch (error) {
