@@ -56,6 +56,10 @@ const readPaste = async (req, res) => {
     data.password = undefined;
 
     res.status(200).json(data);
+
+    if (data.delFlag === true) {
+      await pasteModel.findByIdAndDelete(id);
+    }
   } catch (error) {
     res.status(404).message("Error");
   }
