@@ -1,8 +1,18 @@
 const express = require("express");
-const router = express.Router();
-const { register, login } = require("../controller/authController.js");
+const passport = require("passport");
 
-router.post("/register", register);
-router.post("/login", login);
+const router = express.Router();
+const {
+  newPaste,
+  readPaste,
+  pastes,
+} = require("../controller/pasteController.js");
+router.post(
+  "/newPaste",
+  passport.authenticate("jwt", { session: false }),
+  newPaste
+);
+router.get("/Pastes", passport.authenticate("jwt", { session: false }), pastes);
+router.get("/readPaste/:id", readPaste);
 
 module.exports = router;

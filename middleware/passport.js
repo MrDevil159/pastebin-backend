@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const mongoose = require("mongoose");
 const passportJWT = require("passport-jwt");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
@@ -45,7 +45,7 @@ passport.use(
     },
     async function (jwtPayload, cb) {
       try {
-        const user = await UserModel.findOneById(jwtPayload.id);
+        const user = await UserModel.findById(jwtPayload._id);
         return cb(null, user);
       } catch (err) {
         return cb(err);

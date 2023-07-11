@@ -12,11 +12,7 @@ app.use(passport.initialize());
 require("../middleware/passport.js");
 
 app.use("/auth", authRoutes);
-app.use(
-  "/paste",
-  passport.authenticate("jwt", { session: false }),
-  pasteRoutes
-);
+app.use("/paste", pasteRoutes);
 
 mongoose
   .connect(process.env.MONGO, {
